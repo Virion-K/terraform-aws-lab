@@ -1,9 +1,9 @@
 resource "aws_vpc" "lab" {
   cidr_block = "10.0.0.0/16"
 
-  tags = {
+  tags = merge(local.common_tags, {
     Name = "terraform-lab-vpc"
-  }
+  })
 }
 
 resource "aws_security_group" "rdp_lab" {
@@ -26,7 +26,7 @@ resource "aws_security_group" "rdp_lab" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
+  tags = merge(local.common_tags, {
     Name = "terraform-rdp-lab"
-  }
+  })
 }
